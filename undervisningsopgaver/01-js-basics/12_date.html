@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="da">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Basics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <p>Hvad er din alder?</p>
+    <input type="text" id="min">
+    <p>Hvad er din dates alder?</p>
+    <input type="text" id="date">
+    <button>Beregn datealder</button>
+
+
+    <script>
+        document.querySelector("button").addEventListener("click", buttonClicked);
+
+        let min = document.querySelector("#min").value;
+        let date = document.querySelector("#date").value;
+        let regel = min / 2 + 7;
+
+        function buttonClicked() {
+            let min = document.querySelector("#min").value;
+            let date = document.querySelector("#date").value;
+            let regel = min / 2 + 7;
+            let resultat = `Alderen er ${regel}`;
+            console.log(resultat);
+
+            if (min <= 14) {
+                console.log("Du er for ung!")
+            } else if (date <= 14) {
+                console.log("Du er for ung!")
+            } else if (regel >= date) {
+                console.log("PEDO!")
+            } else if (date >= regel) {
+                console.log("Det er godkendt")
+            }
+        }
+
+    </script>
+</body>
+
+
+</html>
