@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="no">
+
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Basics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<p>Klikk her</p>
+<button onclick="myFunction()">Trykk</button>
+
+<body>
+
+    <script>
+       function myFunction() {
+            let d = new Date();
+            let n = d.getHours();
+
+
+            if (n >= 18) {
+                console.log("godaften");
+            } else if (n >= 10) {
+                console.log("goddag");
+            } else if (n >= 5) {
+                console.log("godmorgen");
+            } else if (n >= 0) {
+                console.log("godnat");
+            }
+        }
+
+    </script>
+</body>
+
+
+
+
+
+</html>
