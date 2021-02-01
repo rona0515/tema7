@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="da">
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Basics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <p>Hundens alder</p>
+    <input type="text" id="alder">
+    <button id="gammel">Beregn gammel</button>
+    <button id="ny">Beregn ny</button>
+
+    <script>
+        document.querySelector("#gammel").addEventListener("click", buttonClickedGammel);
+        document.querySelector("#ny").addEventListener("click", buttonClickedNy);
+
+        function buttonClickedGammel() {
+            let alder = document.querySelector("#alder").value;
+            let regel = alder * 7;
+            console.log(`Din hund er ${regel} år gammel`);
+        }
+
+        function buttonClickedNy() {
+            let alder = document.querySelector("#alder").value;
+            let regel2 = 16 * Math.log(alder) + 31;
+            console.log(`Din hun er ${regel2} år gammel`);
+        }
+
+    </script>
+</body>
+
+
+</html>
