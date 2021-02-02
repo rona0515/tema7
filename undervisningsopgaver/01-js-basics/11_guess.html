@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="da">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript Basics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <style>
+        .hidden {
+            display: none;
+        }
+
+    </style>
+
+    <p>Gjett et tall mellom 0 og 20</p>
+    <input type="text" id="timer">
+    <button>Gjett ett tall!</button>
+    <button id="igen" class="hidden">Prøv igjen!</button>
+
+    <script>
+        let gæt = document.querySelector("#timer").value;
+        let klik = 0;
+
+        document.querySelector("button").addEventListener("click", buttonClicked);
+
+        function buttonClicked() {
+
+            let rand = Math.round(Math.random() * 20);
+
+            klik++;
+
+            console.log(rand);
+
+            if (gæt == rand) {
+                console.log(`Du har gjettet riktig! Du har brukt ${klik} antal klikk! Prøv igjen!`)
+                document.querySelector("#igen").classList.toggle("hidden");
+                document.querySelector("button").classList.toggle("hidden");
+            } else if (gæt > rand) {
+                console.log("Det var for høyt!")
+            } else if (gæt < rand) {
+                console.log("Det var for lavt!")
+            }
+
+        }
+
+        document.querySelector("#igen").addEventListener("click", buttonClickedIgen);
+
+        function buttonClickedIgen() {
+
+            klik = 0;
+            document.querySelector("#igen").classList.toggle("hidden");
+            document.querySelector("button").classList.toggle("hidden");
+
+        }
+
+    </script>
+</body>
+
+</html>
