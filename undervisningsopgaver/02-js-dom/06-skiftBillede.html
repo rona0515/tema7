@@ -186,19 +186,14 @@
 
 
         //skiftBillede oppgaven starter
-
-
-
-        const rand = Math.round(Math.random() * 10);
-
-
-
         let grabPic = document.querySelector("article:nth-child(1) img");
         grabPic.addEventListener("click", skiftBillede);
 
 
 
         function skiftBillede() {
+                    const rand = Math.round(Math.random() * 10);
+
             console.log("grabPic fungerer");
             grabPic.src = "https://placeimg.com/400/400/arch?t="+rand;
             console.log(rand);
