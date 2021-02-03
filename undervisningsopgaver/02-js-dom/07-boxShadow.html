@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <style>
+        main {
+            padding-left: 10vw;
+            padding-right: 10vw;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+
+        header {
+            border: 1px solid black;
+            text-align: center;
+        }
+
+        #section1 {
+            display: grid;
+            grid-template-columns: 1fr;
+        }
+
+        article {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+
+        footer h2 {
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        @media (min-width: 600px) {
+            #section1 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+            }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Titel</h1>
+    </header>
+    <main>
+        <h2>Undertitel</h2>
+        <section id="section1">
+            <article id="article1">
+                <img src="https://placeimg.com/400/300/people">
+                <h3>Article 1</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit quis ea, delectus illo ut nesciunt rem eveniet similique iste. Repellat enim impedit velit voluptates molestiae suscipit perferendis minus illum molestias?</p>
+            </article>
+
+            <article id="article2">
+                <img src="https://placeimg.com/400/300/any">
+                <h3>Article 2</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit quis ea, delectus illo ut nesciunt rem eveniet similique iste. Repellat enim impedit velit voluptates molestiae suscipit perferendis minus illum molestias?</p>
+            </article>
+        </section>
+
+        <footer>
+            <h2>this is the footer</h2>
+        </footer>
+
+    </main>
+
+    <script>
+        //Lytter om DOM loades med addEventListenter
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            console.log("Så fungerer DomContentLoaded");
+
+
+            //Har markeret overskrifter, billeder og paragraffer og derefter ændret teksten.
+
+            const overskrift1 = document.querySelector("h1");
+            overskrift1.textContent = "Website billeder (Indhold er udskiftet)";
+            console.log(overskrift1.textContent);
+
+            const underskrift = document.querySelector("h2");
+            underskrift.textContent;
+            console.log(underskrift.textContent);
+
+
+            /*   const billede1 = document.querySelector("img");
+               billede1.src;
+               console.log(billede1.src);
+
+
+               const billede2 = document.querySelector("article:nth-child(2) img");
+               console.log(billede2);*/
+
+
+            const underrubrik = document.querySelector("h3");
+            underrubrik.textContent = "Læs om det ene billede";
+            console.log(underrubrik.textContent);
+
+            const underrubrik2 = document.querySelector("article:nth-child(2) h3");
+            underrubrik2.textContent = "Læs om det andet billede";
+            console.log(underrubrik2.textContent);
+
+
+            const paragraf = document.querySelector("p");
+            paragraf.textContent = "Læs om den første tekst her, som er er skrevet med textContent. Den er meget interessant og virker meget akademisk, hvis man overhovedet kan beskrive det sådan";
+            console.log(paragraf.textContent);
+
+            const paragraf2 = document.querySelector("article:nth-child(2) p");
+            paragraf2.innerHTML = "Læs en lang og kedelig tekst om <b>det andet billede her. Den er meget mere spændende end den første</b> men stadig kedelig. Desuden er der brugt innerHtml til den";
+            console.log(paragraf2.innerHTML);
+
+
+
+
+            //Skifter billeders src. ud
+
+            const pic1 = document.querySelector("img");
+            pic1.src = "galleri/picture1.jpg";
+            pic1.alt = "her er alt beskrivelsen for det første billede";
+            console.log(pic1);
+
+
+            const pic2 = document.querySelector("article:nth-child(2) img");
+            pic2.src = "galleri/picture2.jpg";
+            pic2.alt = "her er alt beskrivelsen for det andet billede";
+            console.log(pic2);
+
+
+
+
+
+            //Tilføjer en ny article via createElement og append
+
+            let newArticle = document.createElement("article");
+
+
+            //Laver en ny img elemenet og tilføjer en src før jeg appender den til newArticle
+            let pic3 = document.createElement("img");
+
+            pic3.src = "https://placeimg.com/300/400/arch";
+
+            newArticle.appendChild(pic3)
+
+
+            //Tilføjer ny h3 elemenet
+            let overskrift = document.createElement("h3");
+            //laver noget tekst til overskrift
+            let overskriftText = document.createTextNode("Article 3");
+            //tilføjer teksten i overskrift
+            overskrift.appendChild(overskriftText);
+            //tilføjer teksten i overskriften
+            newArticle.appendChild(overskrift);
+
+
+
+            //Laver et p element, skriver så en brødtekst, tilføjer brødteksten til p-elementet som så blir tilføjet i article elementet.
+            let brodtekst = document.createElement("p");
+
+            let brodtekstText = document.createTextNode("Anders er så fucking sej")
+
+            brodtekst.appendChild(brodtekstText);
+
+            newArticle.appendChild(brodtekst);
+
+
+
+            //article bliver sat ind i sektion, som har en variabel
+            let mainSection = document.querySelector("section");
+            //der tilføjes et ´barn´(article 3) til main section
+            mainSection.appendChild(newArticle);
+
+
+
+            //skiftBillede oppgaven starter
+
+
+
+            const rand = Math.round(Math.random() * 10);
+
+
+
+            let grabPic = document.querySelector("article:nth-child(1) img");
+            grabPic.addEventListener("click", skiftBillede);
+
+
+
+            function skiftBillede() {
+                console.log("grabPic fungerer");
+                grabPic.src = "https://placeimg.com/400/400/arch?t=" + rand;
+                console.log(rand);
+            }
+
+
+            //boxShadow opgave starter
+            let article1 = document.querySelector("section article");
+            let article2 = document.querySelector("section article:nth-child(2)");
+
+
+
+            article1.addEventListener("mouseover", boxShadow);
+            article2.addEventListener("mouseover", boxShadow1);
+            newArticle.addEventListener("mouseover", boxShadow2);
+            article1.addEventListener("mouseout", boxShadowGone);
+            article2.addEventListener("mouseout", boxShadowGone);
+            newArticle.addEventListener("mouseout", boxShadowGone);
+
+
+
+            function boxShadow() {
+                console.log("YESSIR");
+                article1.style.boxShadow = "-8px -7px 321px 8px rgba(12,182,82,1)";
+                article1.style.transition = "1s";
+            }
+
+
+
+            function boxShadow1() {
+                console.log("YESSIR2");
+                article2.style.boxShadow = "-8px -7px 321px 8px rgba(12,182,82,1)";
+                article2.style.transition = "1.5s";
+            }
+
+
+
+            function boxShadow2() {
+                console.log("YESSIR3");
+                newArticle.style.boxShadow = "-8px -7px 321px 8px rgba(12,182,82,1)";
+                newArticle.style.transition = "2s";
+            }
+
+
+
+            function boxShadowGone() {
+                console.log("test");
+                article1.style.boxShadow = "none";
+                article2.style.boxShadow = "none";
+                newArticle.style.boxShadow = "none";
+            }
+
+
+
+
+
+
+        }
+    </script>
+
+
+</body></html>
