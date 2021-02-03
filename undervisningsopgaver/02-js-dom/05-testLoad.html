@@ -74,106 +74,115 @@
     </main>
 
     <script>
-        //Har markeret overskrifter, billeder og paragraffer og derefter ændret teksten.
 
-        const overskrift1 = document.querySelector("h1");
-        overskrift1.textContent = "Website billeder (Indhold er udskiftet)";
-        console.log(overskrift1.textContent);
+        //Lytter om DOM loades med addEventListenter
+        document.addEventListener("DOMContentLoaded", start);
 
-        const underskrift = document.querySelector("h2");
-        underskrift.textContent;
-        console.log(underskrift.textContent);
+        function start() {
+            console.log("Så fungerer DomContentLoaded");
 
 
-        /*   const billede1 = document.querySelector("img");
-           billede1.src;
-           console.log(billede1.src);
+            //Har markeret overskrifter, billeder og paragraffer og derefter ændret teksten.
+
+            const overskrift1 = document.querySelector("h1");
+            overskrift1.textContent = "Website billeder (Indhold er udskiftet)";
+            console.log(overskrift1.textContent);
+
+            const underskrift = document.querySelector("h2");
+            underskrift.textContent;
+            console.log(underskrift.textContent);
 
 
-           const billede2 = document.querySelector("article:nth-child(2) img");
-           console.log(billede2);*/
+            /*   const billede1 = document.querySelector("img");
+               billede1.src;
+               console.log(billede1.src);
 
 
-        const underrubrik = document.querySelector("h3");
-        underrubrik.textContent = "Læs om det ene billede";
-        console.log(underrubrik.textContent);
-
-        const underrubrik2 = document.querySelector("article:nth-child(2) h3");
-        underrubrik2.textContent = "Læs om det andet billede";
-        console.log(underrubrik2.textContent);
+               const billede2 = document.querySelector("article:nth-child(2) img");
+               console.log(billede2);*/
 
 
-        const paragraf = document.querySelector("p");
-        paragraf.textContent = "Læs om den første tekst her, som er er skrevet med textContent. Den er meget interessant og virker meget akademisk, hvis man overhovedet kan beskrive det sådan";
-        console.log(paragraf.textContent);
+            const underrubrik = document.querySelector("h3");
+            underrubrik.textContent = "Læs om det ene billede";
+            console.log(underrubrik.textContent);
 
-        const paragraf2 = document.querySelector("article:nth-child(2) p");
-        paragraf2.innerHTML = "Læs en lang og kedelig tekst om <b>det andet billede her. Den er meget mere spændende end den første</b> men stadig kedelig. Desuden er der brugt innerHtml til den";
-        console.log(paragraf2.innerHTML);
-
-
+            const underrubrik2 = document.querySelector("article:nth-child(2) h3");
+            underrubrik2.textContent = "Læs om det andet billede";
+            console.log(underrubrik2.textContent);
 
 
-        //Skifter billeders src. ud
+            const paragraf = document.querySelector("p");
+            paragraf.textContent = "Læs om den første tekst her, som er er skrevet med textContent. Den er meget interessant og virker meget akademisk, hvis man overhovedet kan beskrive det sådan";
+            console.log(paragraf.textContent);
 
-        const pic1 = document.querySelector("img");
-        pic1.src = "galleri/picture1.jpg";
-        pic1.alt = "her er alt beskrivelsen for det første billede";
-        console.log(pic1);
-
-
-        const pic2 = document.querySelector("article:nth-child(2) img");
-        pic2.src = "galleri/picture2.jpg";
-        pic2.alt = "her er alt beskrivelsen for det andet billede";
-        console.log(pic2);
+            const paragraf2 = document.querySelector("article:nth-child(2) p");
+            paragraf2.innerHTML = "Læs en lang og kedelig tekst om <b>det andet billede her. Den er meget mere spændende end den første</b> men stadig kedelig. Desuden er der brugt innerHtml til den";
+            console.log(paragraf2.innerHTML);
 
 
 
 
+            //Skifter billeders src. ud
 
-        //Tilføjer en ny article via createElement og append
-
-        let newArticle = document.createElement("article");
-
-
-        //Laver en ny img elemenet og tilføjer en src før jeg appender den til newArticle
-        let pic3 = document.createElement("img");
-
-        pic3.src = "https://placeimg.com/300/400/arch";
-
-        newArticle.appendChild(pic3)
+            const pic1 = document.querySelector("img");
+            pic1.src = "galleri/picture1.jpg";
+            pic1.alt = "her er alt beskrivelsen for det første billede";
+            console.log(pic1);
 
 
-        //Tilføjer ny h3 elemenet
-        let overskrift = document.createElement("h3");
-        //laver noget tekst til overskrift
-        let overskriftText = document.createTextNode("Article 3");
-        //tilføjer teksten i overskrift
-        overskrift.appendChild(overskriftText);
-        //tilføjer teksten i overskriften
-        newArticle.appendChild(overskrift);
-
-
-
-        //Laver et p element, skriver så en brødtekst, tilføjer brødteksten til p-elementet som så blir tilføjet i article elementet.
-        let brodtekst = document.createElement("p");
-
-        let brodtekstText = document.createTextNode("Anders er så fucking sej")
-
-        brodtekst.appendChild(brodtekstText);
-
-        newArticle.appendChild(brodtekst);
-
-
-
-        //article bliver sat ind i sektion, som har en variabel
-        let mainSection = document.querySelector("section");
-        //der tilføjes et ´barn´(article 3) til main section
-        mainSection.appendChild(newArticle);
+            const pic2 = document.querySelector("article:nth-child(2) img");
+            pic2.src = "galleri/picture2.jpg";
+            pic2.alt = "her er alt beskrivelsen for det andet billede";
+            console.log(pic2);
 
 
 
 
+
+            //Tilføjer en ny article via createElement og append
+
+            let newArticle = document.createElement("article");
+
+
+            //Laver en ny img elemenet og tilføjer en src før jeg appender den til newArticle
+            let pic3 = document.createElement("img");
+
+            pic3.src = "https://placeimg.com/300/400/arch";
+
+            newArticle.appendChild(pic3)
+
+
+            //Tilføjer ny h3 elemenet
+            let overskrift = document.createElement("h3");
+            //laver noget tekst til overskrift
+            let overskriftText = document.createTextNode("Article 3");
+            //tilføjer teksten i overskrift
+            overskrift.appendChild(overskriftText);
+            //tilføjer teksten i overskriften
+            newArticle.appendChild(overskrift);
+
+
+
+            //Laver et p element, skriver så en brødtekst, tilføjer brødteksten til p-elementet som så blir tilføjet i article elementet.
+            let brodtekst = document.createElement("p");
+
+            let brodtekstText = document.createTextNode("Anders er så fucking sej")
+
+            brodtekst.appendChild(brodtekstText);
+
+            newArticle.appendChild(brodtekst);
+
+
+
+            //article bliver sat ind i sektion, som har en variabel
+            let mainSection = document.querySelector("section");
+            //der tilføjes et ´barn´(article 3) til main section
+            mainSection.appendChild(newArticle);
+
+
+
+
+        }
     </script>
 
 
