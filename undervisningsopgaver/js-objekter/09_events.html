@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="da">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+
+        article {
+            background-color: white;
+            margin: 10px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border: 1px solid black;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        .data-container {
+            margin-left: 10vw;
+            margin-right: 10vw;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <section class="data-container"></section>
+
+    <template>
+        <article>
+            <h3>Billder</h3>
+            <img>
+        </article>
+    </template>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+
+            const fil = "billedeEvent.json";
+
+            async function hentdata(fil) {
+                const result = await fetch(fil);
+                const json = await result.json();
+                vis(json);
+
+            }
+
+            const container = document.querySelector(".data-container");
+            const billedeTemplate = document.querySelector("template");
+
+
+            function vis(billede) {
+                billede.forEach(billede => {
+                    let klon = billedeTemplate.cloneNode(true).content;
+                    klon.querySelector("img").src = billede.link;
+
+                    container.appendChild(klon);
+                })
+            }
+
+            hentdata(fil);
+        }
+    </script>
+</body></html>

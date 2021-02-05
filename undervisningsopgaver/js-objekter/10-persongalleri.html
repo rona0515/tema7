@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persongalleri</title>
+    <link rel="stylesheet" href="">
+
+    <style>
+        body {
+            background: rgb(63, 251, 170);
+            background: linear-gradient(149deg, rgba(63, 251, 170, 1) 0%, rgba(24, 46, 241, 1) 100%);
+            font-family: monospace
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 30px;
+            margin-right: 10vw;
+            margin-left: 10vw;
+        }
+
+
+
+        img {
+            width: 100%;
+        }
+
+        article {
+            border-radius: 10px;
+            padding: 1vw;
+            background: rgb(227, 63, 251);
+            background: linear-gradient(149deg, rgba(227, 63, 251, 1) 0%, rgba(24, 46, 241, 1) 100%);
+            box-shadow: 0 0 50px #0bfff6;
+
+        }
+
+        article:hover {
+            transform: scale(1.1);
+            transition: 1.2s;
+        }
+
+        h1 {
+            text-align: center;
+            font-family: Tahoma, Geneva, sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            font-style: normal;
+            text-transform: uppercase;
+            color: #ffff;
+            text-shadow: 0 0 5px #0bfff6;
+        }
+
+        h2 {
+            color: aquamarine;
+        }
+
+        p {
+            color: #ffff;
+            font-family: Tahoma, Geneva, sans-serif;
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Persongalleri</h1>
+
+     <main></main>
+
+    <template>
+        <article>
+            <img src="" alt="" class="billede">
+            <h2 class="navn"></h2>
+            <p class="titel"></p>
+            <p class="fødselsdag"></p>
+        </article>
+    </template>
+
+    <script>
+        const url = "https://persongalleri-5d3e.restdb.io/rest/persongalleri";
+
+        const medieurl = "https://persongalleri-5d3e.restdb.io/media/";
+
+        const options = {
+            headers: {
+                'x-apikey': "600fe9211346a1524ff12e31"
+            }
+        };
+
+        async function hentData() {
+            const resspons = await fetch(url, options);
+            const json = await resspons.json();
+            vis(json);
+        }
+
+        const main = document.querySelector("main");
+        const template = document.querySelector("template").content;
+
+
+        function vis(json) {
+            console.log(json);
+            json.forEach(person => {
+                const klon = template.cloneNode(true);
+                klon.querySelector(".billede").src = medieurl + person.billede;
+                klon.querySelector(".navn").textContent = person.fornavn;
+                klon.querySelector(".navn").innerHTML += ` ${person.efternavn}`;
+                klon.querySelector(".titel").textContent = person.titel;
+                klon.querySelector(".fødselsdag").textContent = person.fødselsdag;
+                main.appendChild(klon);
+            })
+        }
+
+        hentData();
+
+    </script>
+</body>
+
+</html>
