@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        #liste {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-gap: 1em;
+            margin: 2em;
+        }
+
+        .person {
+            padding: 1em;
+            border: 1px solid;
+            border-radius: 1em;
+        }
+
+        .valgt {
+            background-color: skyblue;
+        }
+
+        nav{
+            text-align: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <header>
+        <!--Tilføjer h1-overskrift til at vise det valgte filter. Starter med Alle, da det er det første filter man loader.-->
+        <h1>Alle</h1>
+        <nav>
+            <button data-troende="alle" class="valgt">Alle</button>
+            <button data-troende="ja">Troende</button>
+            <button data-troende="nej">Ikke troende</button>
+            <button data-troende="tvivler">Tvivler</button>
+        </nav>
+    </header>
+
+    <section id="liste"></section>
+
+    <template>
+        <article class="person">
+            <h2 class="navn"></h2>
+            <p class="køn"></p>
+            <p class="troende">Troende: </p>
+            <img src="" alt="" class="profil-billede">
+        </article>
+    </template>
+
+
+    <script>
+        const header = document.querySelector("header h1");
+        const medieurl = "https://persongalleri-5d3e.restdb.io/media/";
+        const myHeaders = {
+
+            "x-apikey": "600fe9211346a1524ff12e31"
+        }
+        document.addEventListener("DOMContentLoaded", start)
+        let personer;
+        let filter = "alle";
+
+
+        // første funktion der kaldes efter DOM er loaded
+        function start() {
+            console.log("DOM er loaded");
+            //Allle mine knapper er herinde
+            const filterKnapper = document.querySelectorAll("nav button");
+            //Looper igennem med forEach og lægger en eventListener på hver knap
+            filterKnapper.forEach(knap => knap.addEventListener("click", filtrerPersoner));
+            loadJSON();
+        }
+
+        //eventlistener knyttet til knapperne der vælger hvad for et filter der er aktivt
+        function filtrerPersoner() {
+            filter = this.dataset.troende; //sæt variabel "filter til værdien af data-trpende på den knap der er klikket på
+            document.querySelector(".valgt").classList.remove("valgt"); //Fjerner class fra min "alle" knap/button
+            this.classList.add("valgt") // valgt class bliver tilføjet igen, men nu på den knap der klikkes på.
+            visPersoner(); //kald funktionen visPersoner efter det nye filter er sat
+            header.textContent = this.textContent; //Når der klikkes på en knap, opdateres h1-overskriften til det valgte filter
+
+        }
+
+        async function loadJSON() {
+            const JSONData = await fetch("https://persongalleri-5d3e.restdb.io/rest/persongalleri", {
+                headers: myHeaders
+            });
+            personer = await JSONData.json();
+            console.log("Personer", personer);
+            visPersoner();
+        }
+
+        //funktion der viser personer i liste view
+        function visPersoner() {
+
+            const dest = document.querySelector("#liste"); // container til articles med en person
+            const skabelon = document.querySelector("template").content; // select indhold af html skabelon (article)
+            dest.textContent = "" //Slettera alt indhold fra listen
+
+            personer.forEach(person => {
+                console.log("Troende", person.troende)
+                // loop igennem json (personer)
+                //Hvis filter er sat til "alle" så viser den alle personer, men hvis det ikke er det, så vil den enten være "ja" "nej" eller "tvivler"
+                if (filter == person.troende || filter == "alle") {
+                    const klon = skabelon.cloneNode(true);
+                    klon.querySelector(".navn").textContent = person.fornavn + " " + person.efternavn;
+                    klon.querySelector(".troende").textContent += person.troende;
+                    klon.querySelector(".profil-billede").src = medieurl + person.billede;
+                    dest.appendChild(klon);
+                }
+            })
+        }
+    </script>
+</body></html>
