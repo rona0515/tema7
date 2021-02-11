@@ -47,6 +47,7 @@
             background-image: url(galleri/babushka.jpg);
             background-size: cover;
             background-position: top;
+            opacity: 0.7;
         }
 
         button {
@@ -55,6 +56,7 @@
             border-radius: 3px;
             padding: 0vw 1vw;
             font-family: 'Libre Baskerville', serif;
+            color: #444444;
 
         }
 
@@ -68,12 +70,6 @@
             background: rgb(252, 128, 77);
             background: linear-gradient(149deg, rgba(252, 128, 77, 0.87) 0%, rgba(172, 28, 28, 0.87) 100%);
             padding: 3vw 1vw;
-        }
-
-        .person {
-            padding: 1em;
-            border: 1px solid;
-            border-radius: 1em;
         }
 
         .valgt {
@@ -91,11 +87,41 @@
             background-color: azure;
             border: 4px solid orange;
             border-radius: 3px;
+            color: #444444;
+            box-shadow: 1px 0px 1px #CCCCCC, 0px 1px 1px #EEEEEE, 2px 1px 1px #CCCCCC, 1px 2px 1px #EEEEEE, 3px 2px 1px #CCCCCC, 2px 3px 1px #EEEEEE, 4px 3px 1px #CCCCCC, 3px 4px 1px #EEEEEE, 5px 4px 1px #CCCCCC, 4px 5px 1px #EEEEEE, 6px 5px 1px #CCCCCC, 5px 6px 1px #EEEEEE, 7px 6px 1px #CCCCCC;
         }
 
         article:hover {
             transform: scale(1.1);
             transition: 1s;
+        }
+
+        #fork_knife{
+            width: 10%;
+            position: absolute;
+            margin-top: 20vw;
+            margin-left: 45.4vw;
+        }
+
+        #circle_container {
+            width: 25%;
+            position: absolute;
+            top: 13.5vw;
+            left: 38vw;
+        }
+
+        .rotate {
+            animation: rotation 8s infinite linear;
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(359deg);
+            }
         }
     </style>
 
@@ -117,6 +143,14 @@
 
     <div class="splash"></div>
 
+    <div id="circle_container">
+        <img class="rotate" src="galleri/bistrocircle.svg" alt="circle">
+    </div>
+
+    <div id="fork_knife">
+        <img src="galleri/utensils-solid.svg" alt="fork_knife">
+    </div>
+
 
     <section id="liste"></section>
 
@@ -128,6 +162,7 @@
             <p class="pris">Pris: </p>
         </article>
     </template>
+
 
     <script>
         const header = document.querySelector("header h1");
@@ -150,6 +185,7 @@
             //Looper igennem med forEach og lægger en eventListener på hver knap
             filterKnapper.forEach(knap => knap.addEventListener("click", filtrerMenuer));
             loadJSON();
+
         }
 
         //eventlistener knyttet til knapperne der vælger hvad for et filter der er aktivt
